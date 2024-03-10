@@ -1,9 +1,7 @@
 package ua.flaer.onlineshop.services.impls;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ua.flaer.onlineshop.mappers.Mapper;
-import ua.flaer.onlineshop.mappers.impls.CategoryMapper;
 import ua.flaer.onlineshop.model.dto.CategoryDto;
 import ua.flaer.onlineshop.model.entities.Category;
 import ua.flaer.onlineshop.repositories.CategoryRepository;
@@ -12,7 +10,6 @@ import ua.flaer.onlineshop.services.CategoryService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -76,6 +73,11 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.save(updatedCategory);
 
         return categoryMapper.mapTo(updatedCategory);
+    }
+
+    @Override
+    public void delete(Long id) {
+        categoryRepository.deleteById(id);
     }
 
 }

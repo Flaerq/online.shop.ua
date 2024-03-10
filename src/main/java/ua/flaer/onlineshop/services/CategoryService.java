@@ -19,4 +19,6 @@ public interface CategoryService {
 
     CategoryDto partialUpdate(Long id, CategoryDto category);
 
+    void delete(Long id);
+
 }

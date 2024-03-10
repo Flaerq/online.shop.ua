@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ua.flaer.onlineshop.model.entities.Category;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -29,5 +31,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(columnDefinition = "category_id",referencedColumnName = "id")
     private Category category;
+
+    @OneToMany(mappedBy="product", cascade = CascadeType.ALL)
+    private List<CartItem> cartItems;
 
 }

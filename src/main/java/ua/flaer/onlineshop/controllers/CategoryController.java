@@ -68,4 +68,11 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.partialUpdate(id, category));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteCategory(@PathVariable("id") Long id){
+        categoryService.delete(id);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 }
