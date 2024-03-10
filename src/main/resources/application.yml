@@ -5,6 +5,10 @@ spring:
     password: 452389
     driver-class-name: org.postgresql.Driver
 
-  sql:
-    init:
-      mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+logging:
+  file:
+    name: "C:/Projects/online-shop/logs/logfile.log"

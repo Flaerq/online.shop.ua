@@ -15,8 +15,8 @@ INSERT INTO products (name, description, price, category_id) VALUES
 
 -- Add users
 INSERT INTO users (user_type, first_name, last_name, email, phone_number, password, address) VALUES
-                                                                                                 ('Regular', 'John', 'Doe', 'john@example.com', '+1234567890', 'john123', 'New York, Main St, 123'),
-                                                                                                 ('Administrator', 'Jane', 'Smith', 'admin@example.com', '+0987654321', 'admin123', 'Los Angeles, Elm St, 456');
+                                                                                                 ('USER', 'John', 'Doe', 'john@example.com', '+1234567890', 'john123', 'New York, Main St, 123'),
+                                                                                                 ('ADMIN', 'Jane', 'Smith', 'admin@example.com', '+0987654321', 'admin123', 'Los Angeles, Elm St, 456');
 
 -- Add orders
 INSERT INTO orders (user_id, order_date, status, address, total_price, comment, payment_method, delivery_method) VALUES
