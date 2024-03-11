@@ -1,6 +1,7 @@
 package ua.flaer.onlineshop.services;
 
 import ua.flaer.onlineshop.model.dto.CartDto;
+import ua.flaer.onlineshop.model.dto.CartItemDto;
 import ua.flaer.onlineshop.model.dto.UserDto;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface CartService {
     boolean isExist(Long id);
 
     void delete(Long id);
+
+    CartDto updateProductQuantity(Long cartId, CartItemDto cartItem);
 }

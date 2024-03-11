@@ -43,7 +43,6 @@ public class CartMapper implements Mapper<Cart, CartDto> {
 
     @Override
     public Cart mapFrom(CartDto cartDto) {
-        System.out.println(cartDto);
         Optional<User> dbUser = userRepository.findById(cartDto.getUserId());
 
         Cart cart = Cart.builder()

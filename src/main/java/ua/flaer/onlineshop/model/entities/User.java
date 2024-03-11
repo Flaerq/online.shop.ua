@@ -3,10 +3,7 @@ package ua.flaer.onlineshop.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ua.flaer.onlineshop.model.enums.UserType;
 
 @NoArgsConstructor
@@ -39,6 +36,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "user_type")
     private UserType userType;
+
 
     @OneToOne(mappedBy = "user")
     private Cart cart;

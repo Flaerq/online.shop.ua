@@ -3,10 +3,13 @@ package ua.flaer.onlineshop.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ua.flaer.onlineshop.exceptions.NoCartFoundException;
 import ua.flaer.onlineshop.model.dto.CartDto;
+import ua.flaer.onlineshop.model.dto.CartItemDto;
 import ua.flaer.onlineshop.services.CartService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/carts")
@@ -43,6 +46,19 @@ public class CartController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(cartService.findCartById(id).get());
+    }
+
+    @PostMapping("/{id}/items")
+    public ResponseEntity<CartDto> addCartItemToCart(@PathVariable("id") Long id,
+                                                         @RequestBody CartItemDto cartItem){
+        try {
+            CartDto cart = cartService.updateProductQuantity(id, cartItem);
+
+            return ResponseEntity.status(HttpStatus.OK).body(cart);
+        } catch (NoCartFoundException ignored){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 
 

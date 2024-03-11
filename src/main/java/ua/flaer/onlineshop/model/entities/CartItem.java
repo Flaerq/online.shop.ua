@@ -2,10 +2,7 @@ package ua.flaer.onlineshop.model.entities;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
@@ -28,4 +25,9 @@ public class CartItem {
     private Product product;
 
     private int quantity;
+
+    @Override
+    public String toString(){
+        return String.format("{id=%d; cartId=%d; productId=%d; quantity=%d}", id, cart.getId(), product.getId(), quantity);
+    }
 }

@@ -36,6 +36,7 @@ public class CartItemMapper implements Mapper<CartItem, CartItemDto> {
                 .id(cartItemDto.getId())
                 .cart(cartRepository.findById(cartItemDto.getCartId()).get())
                 .product(productRepository.findById(cartItemDto.getProductId()).get())
+                .quantity(cartItemDto.getQuantity())
                 .build();
     }
 }
