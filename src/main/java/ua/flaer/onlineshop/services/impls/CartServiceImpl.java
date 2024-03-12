@@ -3,6 +3,7 @@ package ua.flaer.onlineshop.services.impls;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ua.flaer.onlineshop.exceptions.NoCartFoundException;
+import ua.flaer.onlineshop.exceptions.NoCartItemFoundInCartException;
 import ua.flaer.onlineshop.mappers.Mapper;
 import ua.flaer.onlineshop.mappers.impls.CartMapper;
 import ua.flaer.onlineshop.model.dto.CartDto;
@@ -81,9 +82,40 @@ public class CartServiceImpl implements CartService {
             existingCartItem.setQuantity(existingCartItem.getQuantity() + cartItem.getQuantity());
             cartItemRepository.save(existingCartItem);
         } else {
+            cartItem.setCartId(cartId);
             CartItem savedCartItem = cartItemRepository.save(cartItemMapper.mapFrom(cartItem));
             cart.getCartItems().add(savedCartItem);
         }
+
+        return cartMapper.mapTo(cart);
+    }
+
+    @Override
+    public CartDto removeCartItem(Long cartId, Long itemId) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new NoCartFoundException(cartId));
+
+        List<CartItem> cartItems = cart.getCartItems();
+        CartItem cartItemToRemove = cartItems.stream()
+                .filter(item -> item.getId() == itemId)
+                .findFirst().orElseThrow(() -> new NoCartItemFoundInCartException(itemId));
+
+        cart.getCartItems().remove(cartItemToRemove);
+        cartItemRepository.delete(cartItemToRemove);
+
+        return cartMapper.mapTo(cart);
+    }
+
+    @Override
+    public CartDto updateCartItemQuantity(Long cartId, Long itemId, CartItemDto cartItem) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new NoCartFoundException(cartId));
+
+        cart.getCartItems().stream()
+                        .filter(item -> item.getId() == itemId)
+                        .findFirst().orElseThrow(() -> new NoCartItemFoundInCartException(itemId)).setQuantity(cartItem.getQuantity());
+
+        cartItem.setId(itemId);
+        cartItem.setCartId(cartId);
+        cartItemRepository.save(cartItemMapper.mapFrom(cartItem));
 
         return cartMapper.mapTo(cart);
     }

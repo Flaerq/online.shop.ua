@@ -1,5 +1,6 @@
 package ua.flaer.onlineshop.model.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,15 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductDto {
+public class CartItemRequestDto {
 
-    private Long id;
+    private Long productId;
 
-    private String name;
+    private int quantity;
 
-    private String description;
-
-    private Double price;
-
-    private Long categoryId;
 }
